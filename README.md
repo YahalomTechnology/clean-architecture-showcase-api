@@ -67,9 +67,8 @@ src/
 ├── server.ts               # Punto de entrada y listener de red
 ├── config/                 # Infraestructura (Base de datos, Redis, Sockets, Env)
 ├── core/
-│   ├── errors/             # Clases de error personalizadas y serializables
-│   └── utils/              # Funciones auxiliares
-├── middlewares/            # Filtros globales (CORS, validación, error handler)
+│   └── errors/             # Clases de error personalizadas y serializables
+├── middlewares/            # Filtros globales (validación de request, error handler)
 └── modules/                # Módulo de lógica de negocio modular por dominio
     └── task/
         ├── task.controller.ts  # Orquestador HTTP (req/res)
