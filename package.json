@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "test": "vitest run"
   },
   "keywords": [
     "clean-architecture",
@@ -29,7 +30,6 @@
     "ioredis": "^5.4.1",
     "pg": "^8.11.5",
     "socket.io": "^4.7.5",
-    "winston": "^3.13.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -38,6 +38,7 @@
     "@types/node": "^20.12.12",
     "@types/pg": "^8.11.6",
     "tsx": "^4.10.1",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^4.1.10"
   }
 }

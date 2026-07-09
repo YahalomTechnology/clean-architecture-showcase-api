@@ -76,11 +76,14 @@ export class TaskRepository {
       return updated;
     }
 
-    const keys = Object.keys(updates);
+    // Defensa en profundidad: solo se permiten columnas conocidas en el SET,
+    // aunque llegara un objeto con claves extra (mass-assignment).
+    const ALLOWED_UPDATE_FIELDS = ['title', 'description', 'status'];
+    const keys = Object.keys(updates).filter((k) => ALLOWED_UPDATE_FIELDS.includes(k));
     if (keys.length === 0) return this.getById(id);
 
     const setClause = keys.map((key, index) => `${key} = $${index + 2}`).join(', ');
-    const values = Object.values(updates);
+    const values = keys.map((key) => (updates as Record<string, unknown>)[key]);
 
     const query = `
       UPDATE showcase_tasks 
