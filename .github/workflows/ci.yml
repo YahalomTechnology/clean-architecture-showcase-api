@@ -1,0 +1,40 @@
+name: CI
+
+# Sin comprobaciones automáticas hasta hoy. Es un repositorio de muestra, así
+# que lo que se enseña aquí también dice cómo trabajamos: que compile y que sus
+# pruebas pasen no es opcional.
+#
+# Ojo con la rama: este repositorio usa `main`, no `master` como la mayoría de
+# la organización. Un workflow apuntando a `master` no se dispararía nunca.
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  calidad:
+    name: Pruebas y build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v7
+
+      - name: Preparar Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Pruebas
+        run: npm test
+
+      # `npm run build` es `tsc`: compila y comprueba los tipos a la vez.
+      - name: Build
+        run: npm run build
